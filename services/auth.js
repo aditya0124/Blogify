@@ -1,7 +1,5 @@
 const JWT = require("jsonwebtoken");
 
-const secret = "$uper@123";
-
 function createTokenFromUser(user) {
   // in payload we write that propertky of user which we want to be in token
   const payload = {
