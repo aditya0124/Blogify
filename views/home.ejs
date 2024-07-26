@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home</title>
+    <style>
+      body {
+        background: #b0b7be;
+        color: #343a40;
+      }
+      .container {
+        margin-top: 3rem;
+      }
+      .card {
+        margin: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+      }
+      .card:hover {
+        transform: translateY(-10px);
+      }
+      .card-img-top {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+      .card-title {
+        font-size: 1.25rem;
+        color: #007bff;
+      }
+      .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+        transition: background 0.3s;
+      }
+      .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #007bff);
+      }
+      .navbar {
+        background: linear-gradient(45deg, #1f1f1f, #343a40);
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffcc00 !important;
+      }
+      .navbar-nav .nav-link {
+        margin-right: 1rem;
+        font-size: 1.1rem;
+        color: #fff !important;
+        transition: color 0.3s;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #ffcc00 !important;
+      }
+      .dropdown-menu-dark {
+        background-color: #343a40;
+        border: none;
+      }
+      .dropdown-menu-dark .dropdown-item {
+        color: #fff;
+        transition: background-color 0.3s;
+      }
+      .dropdown-menu-dark .dropdown-item:hover {
+        background-color: #495057;
+      }
+      .alert-danger {
+        background-color: #ff4444;
+        color: #fff;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <%- include('./partials/nav') %>
+    <!-- blog rendering -->
+    <div class="container mt-3 row row-cols-1 row-cols-md-3 g-4">
+      <% blogs.forEach(blog => { %>
+      <div class="col">
+        <div class="card h-100">
+          <img
+            src="<%= blog.coverImageURL %>"
+            class="card-img-top"
+            alt="Blog cover image"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= blog.title %></h5>
+            <a href="/blog/<%= blog.id %>" class="btn btn-primary">View</a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <!-- Script -->
+    <%- include('./partials/script') %>
+  </body>
+</html>

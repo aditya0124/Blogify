@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Sign In</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .sign-in-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-top: 50px;
+      }
+      .sign-in-header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .form-control {
+        border-radius: 20px;
+      }
+      .btn-custom {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+      }
+      .btn-custom:hover {
+        background-color: #0056b3;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card sign-in-card">
+            <div class="sign-in-header">
+              <h1 class="font-weight-bold">SIGN IN</h1>
+            </div>
+            <div class="card-body">
+              <form action="/user/signin" method="post">
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                </div>
+                <!-- Password -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    required
+                  />
+                </div>
+                <!-- button -->
+                <button type="submit" class="btn btn-custom btn-block">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <%- include('./partials/script') %>
+  </body>
+</html>

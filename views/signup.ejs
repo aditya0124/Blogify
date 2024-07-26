@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Sign Up</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .sign-up-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-top: 50px;
+      }
+      .sign-up-header {
+        background-color: #28a745;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .form-control {
+        border-radius: 20px;
+      }
+      .btn-custom {
+        background-color: #28a745;
+        color: #fff;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+      }
+      .btn-custom:hover {
+        background-color: #218838;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card sign-up-card">
+            <div class="sign-up-header">
+              <h1 class="font-weight-bold">SIGN UP</h1>
+            </div>
+            <div class="card-body">
+              <form
+                action="/user/signup"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <!-- Name -->
+                <div class="mb-3">
+                  <label for="fullName" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    required
+                  />
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                </div>
+                <!-- Password -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    required
+                  />
+                </div>
+                <!-- Profile Picture -->
+                <div class="mb-3">
+                  <label for="profileImage" class="form-label"
+                    >Profile Picture (Optional)</label
+                  >
+                  <input
+                    name="profileImage"
+                    type="file"
+                    class="form-control"
+                    id="profileImage"
+                  />
+                </div>
+                <!-- button -->
+                <button type="submit" class="btn btn-custom btn-block">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <%- include('./partials/script') %>
+  </body>
+</html>

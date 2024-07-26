@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>User Profile</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .profile-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .profile-header {
+        background-color: #007bff;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      .profile-header img {
+        border-radius: 50%;
+        border: 5px solid #fff;
+      }
+      .profile-body {
+        padding: 20px;
+      }
+      .form-control {
+        border-radius: 20px;
+      }
+      .btn-custom {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+      }
+      .btn-custom:hover {
+        background-color: #0056b3;
+      }
+      .btn-danger-custom {
+        border-radius: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="profile-card">
+            <div class="profile-header">
+              <img
+                src="<%= user.profileImageURL %>"
+                alt="Profile Picture"
+                class="img-fluid rounded-circle mb-3"
+                width="150"
+              />
+              <h5 class="card-title"><%= user.fullName %></h5>
+              <p class="card-text"><%= user.email %></p>
+            </div>
+            <div class="profile-body text-center">
+              <p class="card-text"><%= user.role %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card profile-card">
+            <div class="profile-body">
+              <h5 class="card-title text-center">Edit Profile</h5>
+              <form
+                action="/user/profile/update?_method=PUT"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <label for="fullName">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="fullName"
+                    name="fullName"
+                    value="<%= user.fullName %>"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    value="<%= user.email %>"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">New Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="profileImage">Profile Image</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="profileImage"
+                    name="profileImage"
+                  />
+                </div>
+                <button type="submit" class="btn btn-custom btn-block">
+                  Update
+                </button>
+              </form>
+              <hr />
+              <h5 class="card-title text-center">Delete Account</h5>
+              <form action="/user/profile/delete?_method=DELETE" method="post">
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-danger-custom btn-block"
+                >
+                  Delete Account
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <%- include('./partials/script') %>
+  </body>
+</html>

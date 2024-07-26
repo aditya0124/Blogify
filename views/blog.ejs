@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <title><%= blog.title %></title>
+    <style>
+      body {
+        background: #c6c9cc;
+        color: #343a40;
+      }
+      .container {
+        margin-top: 3rem;
+      }
+      h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      pre {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-top: 2rem;
+      }
+      .profile-img {
+        border-radius: 50%;
+        margin-right: 1rem;
+      }
+      .comment-section h1 {
+        color: #007bff;
+        font-weight: bold;
+        text-align: center;
+      }
+      .comment-form input {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+      }
+      .comment-form button {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        border: none;
+        transition: background 0.3s;
+      }
+      .comment-form button:hover {
+        background: linear-gradient(45deg, #0056b3, #007bff);
+      }
+      .comment {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+      }
+      .comment pre {
+        margin-left: 1rem;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav bar -->
+    <%- include('./partials/nav') %>
+    <!-- render blog page -->
+    <div class="container">
+      <h1><%= blog.title %></h1>
+      <img src="<%= blog.coverImageURL %>" class="mt-3" width="700px" />
+      <!-- body -->
+      <pre class="mt-3"><%= blog.body %></pre>
+    </div>
+
+    <div class="container mt-4">
+      <div class="d-flex align-items-center">
+        <img
+          src="<%= blog.createdBy.profileImageURL %>"
+          class="profile-img"
+          width="50px"
+        />
+        <span><%= blog.createdBy.fullName %></span>
+      </div>
+    </div>
+
+    <!-- comment -->
+    <div class="container mt-5 comment-section">
+      <h1>Comments (<%= comments.length %>)</h1>
+      <% if (locals.user) { %>
+      <!-- means we add comment when only we are logged in -->
+      <form
+        action="/blog/comment/<%= blog._id %>"
+        method="post"
+        class="comment-form mt-4"
+      >
+        <div class="mb-3">
+          <input
+            name="content"
+            type="text"
+            class="form-control"
+            placeholder="Enter your comment"
+          />
+          <!-- button -->
+          <button type="submit" class="btn btn-primary mt-3">Add</button>
+        </div>
+      </form>
+      <% } %>
+      <!-- fetching comments -->
+      <div class="mt-4">
+        <% comments.forEach(comment => { %>
+        <div class="comment">
+          <img
+            src="<%= comment.createdBy.profileImageURL %>"
+            class="profile-img"
+            width="50px"
+          />
+          <div>
+            <strong><%= comment.createdBy.fullName %></strong>
+            <pre><%= comment.content %></pre>
+          </div>
+        </div>
+
+        <% if (comment.createdBy._id.equals(user._id)) { %>
+        <form
+          action="/blog/comment/delete/<%= comment._id %>?_method=DELETE"
+          method="post"
+          class="ml-2"
+        >
+          <button type="submit" class="btn btn-sm btn-danger">
+            <i class="fas fa-trash-alt"></i>
+            <!-- Trash can icon -->
+          </button>
+        </form>
+
+        <% } %> <% }) %>
+      </div>
+    </div>
+    <!-- Script -->
+    <%- include('./partials/script') %>
+  </body>
+</html>
+
+<style>
+  .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.2rem;
+  }
+  .comment {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    background-color: #f9f9f9;
+  }
+  .comment-content {
+    flex: 1;
+  }
+</style>
