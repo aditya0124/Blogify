@@ -1,4 +1,6 @@
+require("dotenv").config();
 const JWT = require("jsonwebtoken");
+const secret = process.env.SECRET_KEY;//get secret key from .env file 
 
 function createTokenFromUser(user) {
   // in payload we write that propertky of user which we want to be in token
