@@ -17,11 +17,11 @@ const blogRoute = require("./routes/blog");
 const Blog = require("./model/blog");
 //
 const app = express();
-const PORT = 9000; // in rel world we dont choose that this run on port no this because might be this port No s not available on any othr computer. so we use env variables;
+const PORT = process.env.PORT || 9000; // in rel world we dont choose that this run on port no this because might be this port No s not available on any othr computer. so we use env variables;
 //connection
-connectMongoDB("mongodb://127.0.0.1:27017/blogify").then(() =>
-  console.log("MongoDB connected")
-);
+mongoose
+  .connect(process.env.DATABASE_URL)
+  .then((e) => console.log("MongoDb Connected"));
 
 //middlewares
 app.use(express.json());
